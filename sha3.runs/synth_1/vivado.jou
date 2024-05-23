@@ -1,0 +1,14 @@
+#-----------------------------------------------------------
+# Vivado v2023.2 (64-bit)
+# SW Build 4029153 on Fri Oct 13 20:14:34 MDT 2023
+# IP Build 4028589 on Sat Oct 14 00:45:43 MDT 2023
+# SharedData Build 4025554 on Tue Oct 10 17:18:54 MDT 2023
+# Start of session at: Fri May 24 01:17:03 2024
+# Process ID: 9240
+# Current directory: D:/vivado_projects/sha3/sha3.runs/synth_1
+# Command line: vivado.exe -log PERMUTATION_MODULE.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source PERMUTATION_MODULE.tcl
+# Log file: D:/vivado_projects/sha3/sha3.runs/synth_1/PERMUTATION_MODULE.vds
+# Journal file: D:/vivado_projects/sha3/sha3.runs/synth_1\vivado.jou
+# Running On: WitekK, OS: Windows, CPU Frequency: 2496 MHz, CPU Physical cores: 6, Host memory: 34164 MB
+#-----------------------------------------------------------
+source PERMUTATION_MODULE.tcl -notrace
