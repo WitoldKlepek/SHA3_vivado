@@ -25,7 +25,7 @@ else
 fi
 export LD_LIBRARY_PATH
 
-HD_PWD='D:/vivado_projects/sha3/sha3.runs/synth_1'
+HD_PWD='D:/vivado_projects/sha3/SHA3_vivado/sha3.runs/synth_1'
 cd "$HD_PWD"
 
 HD_LOG=runme.log
@@ -41,4 +41,4 @@ EAStep()
      fi
 }
 
-EAStep vivado -log PERMUTATION_MODULE.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source PERMUTATION_MODULE.tcl
+EAStep vivado -log BUFFER.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source BUFFER.tcl

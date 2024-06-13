@@ -1,15 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="synth_1" LaunchPart="xc7z020clg484-1" LaunchTime="1716506220">
-  <File Type="PA-TCL" Name="PERMUTATION_MODULE.tcl"/>
-  <File Type="REPORTS-TCL" Name="PERMUTATION_MODULE_reports.tcl"/>
-  <File Type="RDS-RDS" Name="PERMUTATION_MODULE.vds"/>
-  <File Type="RDS-UTIL" Name="PERMUTATION_MODULE_utilization_synth.rpt"/>
-  <File Type="RDS-UTIL-PB" Name="PERMUTATION_MODULE_utilization_synth.pb"/>
-  <File Type="RDS-DCP" Name="PERMUTATION_MODULE.dcp"/>
+<GenRun Id="synth_1" LaunchPart="xc7z020clg484-1" LaunchTime="1718310161">
+  <File Type="PA-TCL" Name="BUFFER.tcl"/>
+  <File Type="RDS-PROPCONSTRS" Name="BUFFER_drc_synth.rpt"/>
+  <File Type="REPORTS-TCL" Name="BUFFER_reports.tcl"/>
+  <File Type="RDS-RDS" Name="BUFFER.vds"/>
+  <File Type="RDS-UTIL" Name="BUFFER_utilization_synth.rpt"/>
+  <File Type="RDS-UTIL-PB" Name="BUFFER_utilization_synth.pb"/>
+  <File Type="RDS-DCP" Name="BUFFER.dcp"/>
+  <File Type="VDS-TIMINGSUMMARY" Name="BUFFER_timing_summary_synth.rpt"/>
+  <File Type="VDS-TIMING-PB" Name="BUFFER_timing_summary_synth.pb"/>
   <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1" RelGenDir="$PGENDIR/sources_1">
     <Filter Type="Srcs"/>
+    <File Path="$PSRCDIR/sources_1/new/BUFFER.sv">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
     <File Path="$PPRDIR/CHI.sv">
       <FileInfo>
+        <Attr Name="AutoDisabled" Val="1"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
@@ -17,6 +28,7 @@
     </File>
     <File Path="$PPRDIR/CHI_row.sv">
       <FileInfo>
+        <Attr Name="AutoDisabled" Val="1"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
@@ -24,6 +36,7 @@
     </File>
     <File Path="$PPRDIR/IOTA.sv">
       <FileInfo>
+        <Attr Name="AutoDisabled" Val="1"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
@@ -31,6 +44,7 @@
     </File>
     <File Path="$PPRDIR/PI.sv">
       <FileInfo>
+        <Attr Name="AutoDisabled" Val="1"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
@@ -38,6 +52,7 @@
     </File>
     <File Path="$PPRDIR/RHO.sv">
       <FileInfo>
+        <Attr Name="AutoDisabled" Val="1"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
@@ -45,6 +60,7 @@
     </File>
     <File Path="$PPRDIR/RND.sv">
       <FileInfo>
+        <Attr Name="AutoDisabled" Val="1"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
@@ -52,6 +68,7 @@
     </File>
     <File Path="$PPRDIR/ROUND_CONSTANT_COUNTER.sv">
       <FileInfo>
+        <Attr Name="AutoDisabled" Val="1"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
@@ -59,6 +76,7 @@
     </File>
     <File Path="$PPRDIR/THETA.sv">
       <FileInfo>
+        <Attr Name="AutoDisabled" Val="1"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
@@ -66,6 +84,7 @@
     </File>
     <File Path="$PPRDIR/THETA_column.sv">
       <FileInfo>
+        <Attr Name="AutoDisabled" Val="1"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
@@ -73,6 +92,15 @@
     </File>
     <File Path="$PPRDIR/PERMUTATION_MODULE.sv">
       <FileInfo>
+        <Attr Name="AutoDisabled" Val="1"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/PADDING_MODULE.sv">
+      <FileInfo>
+        <Attr Name="AutoDisabled" Val="1"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
@@ -80,8 +108,7 @@
     </File>
     <Config>
       <Option Name="DesignMode" Val="RTL"/>
-      <Option Name="TopModule" Val="PERMUTATION_MODULE"/>
-      <Option Name="TopAutoSet" Val="TRUE"/>
+      <Option Name="TopModule" Val="BUFFER"/>
     </Config>
   </FileSet>
   <FileSet Name="constrs_in" Type="Constrs" RelSrcDir="$PSRCDIR/constrs_1" RelGenDir="$PGENDIR/constrs_1">

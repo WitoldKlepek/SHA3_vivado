@@ -2,15 +2,6 @@
 2020.2
 Oct 13 2023
 20:47:58
-D:/magisterka/vivado_projekt/SHA3_vivado/CHI.sv,1716540507,systemVerilog,,D:/magisterka/vivado_projekt/SHA3_vivado/CHI_row.sv,,CHI,,uvm,,,,,,
-D:/magisterka/vivado_projekt/SHA3_vivado/CHI_row.sv,1716540507,systemVerilog,,D:/magisterka/vivado_projekt/SHA3_vivado/IOTA.sv,,CHI_row,,uvm,,,,,,
-D:/magisterka/vivado_projekt/SHA3_vivado/IOTA.sv,1716540507,systemVerilog,,D:/magisterka/vivado_projekt/SHA3_vivado/PERMUTATION_MODULE.sv,,IOTA,,uvm,,,,,,
-D:/magisterka/vivado_projekt/SHA3_vivado/PERMUTATION_MODULE.sv,1716540507,systemVerilog,,D:/magisterka/vivado_projekt/SHA3_vivado/PI.sv,,PERMUTATION_MODULE,,uvm,,,,,,
-D:/magisterka/vivado_projekt/SHA3_vivado/PI.sv,1716540507,systemVerilog,,D:/magisterka/vivado_projekt/SHA3_vivado/RHO.sv,,PI,,uvm,,,,,,
-D:/magisterka/vivado_projekt/SHA3_vivado/RHO.sv,1716540507,systemVerilog,,D:/magisterka/vivado_projekt/SHA3_vivado/RND.sv,,RHO,,uvm,,,,,,
-D:/magisterka/vivado_projekt/SHA3_vivado/RND.sv,1716540507,systemVerilog,,D:/magisterka/vivado_projekt/SHA3_vivado/ROUND_CONSTANT_COUNTER.sv,,RND,,uvm,,,,,,
-D:/magisterka/vivado_projekt/SHA3_vivado/ROUND_CONSTANT_COUNTER.sv,1716540507,systemVerilog,,D:/magisterka/vivado_projekt/SHA3_vivado/THETA.sv,,ROUND_CONSTANT_COUNTER,,uvm,,,,,,
-D:/magisterka/vivado_projekt/SHA3_vivado/SHA3_tb.sv,1716540507,systemVerilog,,,,SHA3_TB,,uvm,,,,,,
-D:/magisterka/vivado_projekt/SHA3_vivado/THETA.sv,1716540507,systemVerilog,,D:/magisterka/vivado_projekt/SHA3_vivado/THETA_column.sv,,THETA,,uvm,,,,,,
-D:/magisterka/vivado_projekt/SHA3_vivado/THETA_column.sv,1716540507,systemVerilog,,D:/magisterka/vivado_projekt/SHA3_vivado/SHA3_tb.sv,,THETA_column,,uvm,,,,,,
-D:/magisterka/vivado_projekt/SHA3_vivado/sha3.sim/sim_1/behav/xsim/glbl.v,1716540507,verilog,,,,glbl,,uvm,,,,,,
+D:/vivado_projects/sha3/SHA3_vivado/sha3.sim/sim_1/behav/xsim/glbl.v,1717706526,verilog,,,,glbl,,uvm,,,,,,
+D:/vivado_projects/sha3/SHA3_vivado/sha3.srcs/sim_1/new/BUFFER_TB.sv,1717782582,systemVerilog,,,,BUFFER_TB,,uvm,,,,,,
+D:/vivado_projects/sha3/SHA3_vivado/sha3.srcs/sources_1/new/BUFFER.sv,1718309945,systemVerilog,,D:/vivado_projects/sha3/SHA3_vivado/sha3.srcs/sim_1/new/BUFFER_TB.sv,,BUFFER,,uvm,,,,,,

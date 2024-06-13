@@ -24,7 +24,7 @@ eval( EAInclude(ISEJScriptLib) );
 
 
 ISEStep( "vivado",
-         "-log PERMUTATION_MODULE.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source PERMUTATION_MODULE.tcl" );
+         "-log BUFFER.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source BUFFER.tcl" );
 
 
 
