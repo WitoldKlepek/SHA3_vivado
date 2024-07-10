@@ -37,10 +37,12 @@ module PADDING_MODULE #(
     output logic READ_VALID
 );
 
-logic [READ_DATA_WIDTH-1:0] buffer_out;
+logic [READ_DATA_WIDTH-1:0] buffer_out_padder_in;
 logic ctrl_read_en, ctrl_write_en, ctrl_pad;
-logic [PTR_SIZE-1:0] ctrl_pad_byte_ptr;
+logic [PTR_SIZE-1:0] ctrl_padder_ptr;
 logic [READ_DATA_WIDTH-1:0] read_data_reg;
+logic [READ_DATA_WIDTH-1:0] padder_out;
+
 
 BUFFER #(
     .WRITE_DATA_WIDTH(WRITE_DATA_WIDTH),
@@ -52,8 +54,17 @@ BUFFER #(
     .A_RST(A_RST),
     .WRITE_DATA(WRITE_DATA),
     .WRITE_EN(ctrl_write_en),
-    .READ_DATA(buffer_out),
+    .READ_DATA(buffer_out_padder_in),
     .READ_EN(ctrl_read_en)
+);
+
+PADDER #(
+    .DATA_WIDTH(READ_DATA_WIDTH),
+    .DATA_PART_WIDTH(WRITE_DATA_WIDTH)
+) padder1 (
+    .PADDER_IN(buffer_out_padder_in),
+    .PADDER_OUT(padder_out),
+    .PAD_PTR(ctrl_padder_ptr)
 );
 
 PADDING_CTRL_UNIT  #(
@@ -65,24 +76,24 @@ PADDING_CTRL_UNIT  #(
     .CTRL_WRITE_EN(ctrl_write_en),
     .CTRL_READ_EN(ctrl_read_en),
     .CTRL_PAD(ctrl_pad),
-    .CTRL_PAD_BYTE_PTR(ctrl_pad_byte_ptr)
+    .CTRL_PADDER_PTR(ctrl_padder_ptr)
 );
 
 assign READ_DATA = read_data_reg;
 
-always@(posedge CLK or posedge A_RST) begin
-    if(A_RST == 1'b1)
-        read_data_reg   <=  {READ_DATA_WIDTH{`OUTPUT_RESET_STATE}};
-    else
-        if(CE == 1'b1) begin
-            if(ctrl_pad == 1'b0)
-                read_data_reg   <=  buffer_out;
-            else begin
-                read_data_reg[READ_DATA_WIDTH-1:READ_DATA_WIDTH-(ctrl_pad_byte_ptr)*WRITE_DATA_WIDTH]   <= buffer_out[READ_DATA_WIDTH-1:READ_DATA_WIDTH-(ctrl_pad_byte_ptr)*WRITE_DATA_WIDTH]; 
-                read_data_reg[READ_DATA_WIDTH-(ctrl_pad_byte_ptr)*WRITE_DATA_WIDTH-1:0] <= {3'b101,{(READ_DATA_WIDTH-(ctrl_pad_byte_ptr*WRITE_DATA_WIDTH)-4){1'b0}},1'b1};
-            end
-        end
-end
+//always@(posedge CLK or posedge A_RST) begin
+//    if(A_RST == 1'b1)
+//        read_data_reg   <=  {READ_DATA_WIDTH{`OUTPUT_RESET_STATE}};
+//    else
+//        if(CE == 1'b1) begin
+//            if(ctrl_pad == 1'b0)
+//                read_data_reg   <=  buffer_out_padder_in;
+//            else begin
+//                read_data_reg[READ_DATA_WIDTH-1:READ_DATA_WIDTH-(ctrl_pad_byte_ptr)*WRITE_DATA_WIDTH]   <= buffer_out[READ_DATA_WIDTH-1:READ_DATA_WIDTH-(ctrl_pad_byte_ptr)*WRITE_DATA_WIDTH]; 
+//                read_data_reg[READ_DATA_WIDTH-(ctrl_pad_byte_ptr)*WRITE_DATA_WIDTH-1:0] <= {3'b101,{(READ_DATA_WIDTH-(ctrl_pad_byte_ptr*WRITE_DATA_WIDTH)-4){1'b0}},1'b1};
+//            end
+//        end
+//end
 
 
 endmodule

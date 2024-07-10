@@ -60,4 +60,5 @@ endgenerate
 
 assign EMPTY = (wrPtr[PTR_SIZE] == rdPtr[PTR_SIZE]) && (wrPtr[PTR_SIZE-1:0] == rdPtr[PTR_SIZE-1:0]);
 assign FULL = (wrPtr[PTR_SIZE] != rdPtr[PTR_SIZE]) && (wrPtr[PTR_SIZE-1:0] == rdPtr[PTR_SIZE-1:0]);
+
 endmodule
