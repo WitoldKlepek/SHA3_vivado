@@ -36,8 +36,8 @@ end
 integer i;
 always_ff @(posedge CLK, posedge A_RST) begin
     if(A_RST == 1'b1) begin
-        wrPtr   <=  1'b0;
-        rdPtr   <=  1'b0;
+        wrPtr   <=  0;
+        rdPtr   <=  0;
         for (i=0;i<DEPTH;i=i+1) begin
             mem[i]  <=  0;
         end

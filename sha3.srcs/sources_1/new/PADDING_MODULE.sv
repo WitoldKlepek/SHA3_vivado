@@ -1,25 +1,6 @@
+
 `timescale 1ns / 1ps
 `define OUTPUT_RESET_STATE 1'b0
-//////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date: 25.05.2024 11:55:43
-// Design Name: 
-// Module Name: PADDING_MODULE
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
-//////////////////////////////////////////////////////////////////////////////////
-
 
 module PADDING_MODULE #(
     parameter WRITE_DATA_WIDTH = 32,
@@ -33,16 +14,16 @@ module PADDING_MODULE #(
     input logic A_RST,
     input logic [WRITE_DATA_WIDTH-1:0] WRITE_DATA,
     input logic WRITE_VALID,
-    output logic [READ_DATA_WIDTH-1:0] READ_DATA,
-    output logic READ_VALID
+    output logic [READ_DATA_WIDTH-1:0] READ_DATA
+    //output logic READ_VALID
 );
 
 logic [READ_DATA_WIDTH-1:0] buffer_out_padder_in;
-logic ctrl_read_en, ctrl_write_en, ctrl_pad;
+logic ctrl_read_en, ctrl_write_en;
 logic [PTR_SIZE-1:0] ctrl_padder_ptr;
 logic [READ_DATA_WIDTH-1:0] read_data_reg;
 logic [READ_DATA_WIDTH-1:0] padder_out;
-
+logic ctrl_buf_empty, ctrl_buf_full;
 
 BUFFER #(
     .WRITE_DATA_WIDTH(WRITE_DATA_WIDTH),
@@ -55,7 +36,9 @@ BUFFER #(
     .WRITE_DATA(WRITE_DATA),
     .WRITE_EN(ctrl_write_en),
     .READ_DATA(buffer_out_padder_in),
-    .READ_EN(ctrl_read_en)
+    .READ_EN(ctrl_read_en),
+    .FULL(ctrl_buf_full),
+    .EMPTY(ctrl_buf_empty)
 );
 
 PADDER #(
@@ -67,33 +50,24 @@ PADDER #(
     .PAD_PTR(ctrl_padder_ptr)
 );
 
+
+assign READ_DATA = padder_out;
+
 PADDING_CTRL_UNIT  #(
-    .PTR_SIZE(PTR_SIZE)
+    .IN_OUT_RATIO(IN_OUT_RATIO)
 ) pad_ctrl_unit  (
     .CLK(CLK),
     .CE(CE),
     .A_RST(A_RST),
-    .CTRL_WRITE_EN(ctrl_write_en),
-    .CTRL_READ_EN(ctrl_read_en),
-    .CTRL_PAD(ctrl_pad),
-    .CTRL_PADDER_PTR(ctrl_padder_ptr)
+    .DATA_IN_VALID(WRITE_VALID),
+    .CTRL_BUF_WRITE_EN(ctrl_write_en),
+    .CTRL_BUF_READ_EN(ctrl_read_en),
+    .CTRL_PAD_PTR(ctrl_padder_ptr),
+    .BUF_EMPTY(ctrl_buf_empty),
+    .BUF_FULL(ctrl_buf_full)
 );
 
 assign READ_DATA = read_data_reg;
-
-//always@(posedge CLK or posedge A_RST) begin
-//    if(A_RST == 1'b1)
-//        read_data_reg   <=  {READ_DATA_WIDTH{`OUTPUT_RESET_STATE}};
-//    else
-//        if(CE == 1'b1) begin
-//            if(ctrl_pad == 1'b0)
-//                read_data_reg   <=  buffer_out_padder_in;
-//            else begin
-//                read_data_reg[READ_DATA_WIDTH-1:READ_DATA_WIDTH-(ctrl_pad_byte_ptr)*WRITE_DATA_WIDTH]   <= buffer_out[READ_DATA_WIDTH-1:READ_DATA_WIDTH-(ctrl_pad_byte_ptr)*WRITE_DATA_WIDTH]; 
-//                read_data_reg[READ_DATA_WIDTH-(ctrl_pad_byte_ptr)*WRITE_DATA_WIDTH-1:0] <= {3'b101,{(READ_DATA_WIDTH-(ctrl_pad_byte_ptr*WRITE_DATA_WIDTH)-4){1'b0}},1'b1};
-//            end
-//        end
-//end
 
 
 endmodule

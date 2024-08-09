@@ -1,29 +1,9 @@
 `timescale 1ns / 1ps
 
 `define WRITE_DATA_WIDTH 64
-`define READ_DATA_WIDTH 1152
-`define DEPTH 64
+`define READ_DATA_WIDTH 576
+`define DEPTH 32
 `define IN_OUT_RATIO (`READ_DATA_WIDTH / `WRITE_DATA_WIDTH)
-//////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date: 25.05.2024 11:31:54
-// Design Name: 
-// Module Name: PADDING_MODULE_TB
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
-//////////////////////////////////////////////////////////////////////////////////
-
 
 module PADDING_MODULE_TB();
 
@@ -43,8 +23,8 @@ PADDING_MODULE #(
     .A_RST(A_RST),
     .WRITE_DATA(WRITE_DATA),
     .WRITE_VALID(WRITE_VALID),
-    .READ_DATA(READ_DATA),
-    .READ_VALID(READ_VALID)
+    .READ_DATA(READ_DATA)
+    //,.READ_VALID(READ_VALID)
 );
 
 initial begin
@@ -61,11 +41,15 @@ end
 
 initial begin
     WRITE_DATA      <=   0;
-    WRITE_VALID     <=   1'b1;
     forever
     #10 WRITE_DATA  <=  WRITE_DATA + 1;   
 end
 
+initial begin
+    WRITE_VALID         <=   1'b1;
+    #300 WRITE_VALID    <=   1'b0;
+    #50 $finish;
+end
 //initial begin
 //    READ_EN <=  1'b0;
 //    #50
