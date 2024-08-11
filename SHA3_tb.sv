@@ -34,12 +34,14 @@ endfunction
 
 
 PERMUTATION_MODULE #(
-	.R_BLOCK_SIZE(1152)
+	.R_BLOCK_SIZE(R_BLOCK_SIZE)
 	) UUT1 (
 	.IN(in_conv),
 	.OUT(out_conv),
 	.CLK(CLK),
-	.A_RST(A_RST)
+	.A_RST(A_RST),
+	.CE(CE),
+	.VALID_
 );
 	
 
@@ -49,7 +51,6 @@ assign out = ConvertData1600(out_conv);
 initial begin
 	#0 $monitor("TIME = %0t \n in = %h \n in_conv = %h \n out = %h ",$time, in, in_conv, out);
 	#5 in	<= {{40'h53587B9901},{1104{1'b0}},{8'h80}};
-
 end
 
 initial begin

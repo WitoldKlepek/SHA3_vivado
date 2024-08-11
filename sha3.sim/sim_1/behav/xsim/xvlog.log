@@ -1,10 +1,24 @@
-INFO: [VRFC 10-2263] Analyzing SystemVerilog file "D:/vivado_projects/sha3/SHA3_vivado/sha3.srcs/sources_1/new/BUFFER.sv" into library xil_defaultlib
-INFO: [VRFC 10-311] analyzing module BUFFER
-INFO: [VRFC 10-2263] Analyzing SystemVerilog file "D:/vivado_projects/sha3/SHA3_vivado/sha3.srcs/sources_1/new/PADDER.sv" into library xil_defaultlib
-INFO: [VRFC 10-311] analyzing module PADDER
-INFO: [VRFC 10-2263] Analyzing SystemVerilog file "D:/vivado_projects/sha3/SHA3_vivado/sha3.srcs/sources_1/new/PADDING_CTRL_UNIT.sv" into library xil_defaultlib
-INFO: [VRFC 10-311] analyzing module PADDING_CTRL_UNIT
-INFO: [VRFC 10-2263] Analyzing SystemVerilog file "D:/vivado_projects/sha3/SHA3_vivado/sha3.srcs/sources_1/new/PADDING_MODULE.sv" into library xil_defaultlib
-INFO: [VRFC 10-311] analyzing module PADDING_MODULE
-INFO: [VRFC 10-2263] Analyzing SystemVerilog file "D:/vivado_projects/sha3/SHA3_vivado/sha3.srcs/sim_1/new/PADDING_MODULE_TB.sv" into library xil_defaultlib
-INFO: [VRFC 10-311] analyzing module PADDING_MODULE_TB
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "D:/vivado_projects/sha3/SHA3_vivado/CHI.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module CHI
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "D:/vivado_projects/sha3/SHA3_vivado/CHI_row.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module CHI_row
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "D:/vivado_projects/sha3/SHA3_vivado/IOTA.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module IOTA
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "D:/vivado_projects/sha3/SHA3_vivado/sha3.srcs/sources_1/new/PERMUTATION_CTRL_UNIT.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module PERMUTATION_CTRL_UNIT
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "D:/vivado_projects/sha3/SHA3_vivado/PERMUTATION_MODULE.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module PERMUTATION_MODULE
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "D:/vivado_projects/sha3/SHA3_vivado/PI.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module PI
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "D:/vivado_projects/sha3/SHA3_vivado/RHO.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module RHO
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "D:/vivado_projects/sha3/SHA3_vivado/RND.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module RND
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "D:/vivado_projects/sha3/SHA3_vivado/ROUND_CONSTANT_COUNTER.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module ROUND_CONSTANT_COUNTER
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "D:/vivado_projects/sha3/SHA3_vivado/THETA.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module THETA
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "D:/vivado_projects/sha3/SHA3_vivado/THETA_column.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module THETA_column
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "D:/vivado_projects/sha3/SHA3_vivado/sha3.srcs/sim_1/new/PERMUTATION_MODULE_TB.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module PERMUTATION_MODULE_TB

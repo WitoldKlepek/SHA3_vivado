@@ -14,8 +14,8 @@ module PADDING_MODULE #(
     input logic A_RST,
     input logic [WRITE_DATA_WIDTH-1:0] WRITE_DATA,
     input logic WRITE_VALID,
-    output logic [READ_DATA_WIDTH-1:0] READ_DATA
-    //output logic READ_VALID
+    output logic [READ_DATA_WIDTH-1:0] READ_DATA,
+    output logic CTRL_READ_EN
 );
 
 logic [READ_DATA_WIDTH-1:0] buffer_out_padder_in;
@@ -50,7 +50,7 @@ PADDER #(
     .PAD_PTR(ctrl_padder_ptr)
 );
 
-
+assign CTRL_READ_EN = ctrl_read_en;
 assign READ_DATA = padder_out;
 
 PADDING_CTRL_UNIT  #(

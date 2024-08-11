@@ -21,6 +21,8 @@ module BUFFER #(
 logic [WRITE_DATA_WIDTH-1:0] mem[DEPTH];
 logic [PTR_SIZE:0] wrPtr, wrPtrNext;
 logic [PTR_SIZE:0] rdPtr, rdPtrNext;
+logic [READ_DATA_WIDTH-1:0] rdData;
+
 
 always_comb begin
     wrPtrNext = wrPtr;
@@ -54,9 +56,22 @@ end
 genvar j;
 generate
     for (j=0; j<IN_OUT_RATIO;j=j+1) begin
-        assign READ_DATA[(j+1)*WRITE_DATA_WIDTH-1:j*WRITE_DATA_WIDTH] = mem[rdPtr[PTR_SIZE-1:0]+j];
+        assign rdData[(j+1)*WRITE_DATA_WIDTH-1:j*WRITE_DATA_WIDTH] = mem[rdPtr[PTR_SIZE-1:0]+j];
     end
 endgenerate
+
+always_ff @(posedge CLK, posedge A_RST) 
+begin
+    if(A_RST == 1'b1) begin
+        READ_DATA   <=  0;
+    end
+        else begin
+            if(CE == 1'b1) begin
+                if(READ_EN == 1'b1)
+                    READ_DATA <= rdData;
+            end
+        end
+end
 
 assign EMPTY = (wrPtr[PTR_SIZE] == rdPtr[PTR_SIZE]) && (wrPtr[PTR_SIZE-1:0] == rdPtr[PTR_SIZE-1:0]);
 assign FULL = (wrPtr[PTR_SIZE] != rdPtr[PTR_SIZE]) && (wrPtr[PTR_SIZE-1:0] == rdPtr[PTR_SIZE-1:0]);
