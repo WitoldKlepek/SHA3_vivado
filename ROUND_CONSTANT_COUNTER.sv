@@ -28,7 +28,7 @@ always @(posedge CLK or posedge A_RST)
 begin
 	if (A_RST == 1'b1) begin
 	   twenty_four_counter	<=	0;
-	   WAIT_FOR_NEW_MESSAGE <=  1'b0;
+	   WAIT_FOR_NEW_MESSAGE <=  1'b1;
 	end else begin
 		if(CE == 1'b1) begin
 		    if(COUNTER_RESET == 1'b1) begin

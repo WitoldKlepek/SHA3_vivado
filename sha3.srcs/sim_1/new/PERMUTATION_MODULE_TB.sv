@@ -6,7 +6,7 @@
 module PERMUTATION_MODULE_TB();
 
 localparam STATE_SIZE = 1600;
-localparam R_BLOCK_SIZE = 832;
+localparam R_BLOCK_SIZE = 1152;
 logic [0:STATE_SIZE-1] out, out_conv; 
 
 logic [0:R_BLOCK_SIZE-1] in,in_conv;
@@ -33,7 +33,7 @@ function [R_BLOCK_SIZE-1:0] ConvertDataRBlock;
 endfunction
 
 PERMUTATION_MODULE #(
-	.R_BLOCK_SIZE(1152)
+	.R_BLOCK_SIZE(R_BLOCK_SIZE)
 	) UUT1 (
 	.IN(in_conv),
 	.OUT(out_conv),
@@ -48,7 +48,7 @@ assign out = ConvertData1600(out_conv);
 
 initial begin
 	#0 $monitor("TIME = %0t \n in = %h \n in_conv = %h \n out = %h ",$time, in, in_conv, out);
-	#5 in	<= {{40'h53587B9901},{1104{1'b0}},{8'h80}};
+	#5 in	<= {{40'h53587B9901},{{R_BLOCK_SIZE-48}{1'b0}},{8'h80}};
 end
 
 initial begin

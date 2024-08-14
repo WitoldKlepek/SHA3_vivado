@@ -5,7 +5,6 @@ Running: D:/Vivado/2023.2/bin/unwrapped/win64.o/xelab.exe --incr --debug typical
 Using 2 slave threads.
 Starting static elaboration
 Pass Through NonSizing Optimizer
-WARNING: [VRFC 10-3091] actual bit length 832 differs from formal bit length 1152 for port 'IN' [D:/vivado_projects/sha3/SHA3_vivado/sha3.srcs/sim_1/new/PERMUTATION_MODULE_TB.sv:38]
 Completed static elaboration
 Starting simulation data flow analysis
 WARNING: [XSIM 43-4099] "D:/vivado_projects/sha3/SHA3_vivado/CHI.sv" Line 5. Module CHI_default doesn't have a timescale but at least one module in design has a timescale.

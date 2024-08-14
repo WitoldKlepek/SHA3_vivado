@@ -10,7 +10,7 @@ module PERMUTATION_MODULE #(
 	input logic CLK,
 	input logic A_RST,
 	input logic CE,
-	input VALID_MESSAGE_FROM_PADDING
+	input logic VALID_MESSAGE_FROM_PADDING
 	//output OUT_VALID
 	);
 
@@ -20,13 +20,15 @@ logic [0:`STATE_SIZE-1] rnd_in, s_reg;
 logic first_rnd;
 logic [0:`Z_WIDTH-1] round_constant;
 logic wait_for_n_mess;
-
+//logic initial_state_bef_first_word;
 
 RND RND1(
 	.IN(rnd_in),
 	.OUT(rnd_out),
 	.RND_CONST(round_constant)
 );
+
+assign rnd_in = VALID_MESSAGE_FROM_PADDING ? {IN ^ s_reg[0:R_BLOCK_SIZE-1] ,s_reg[R_BLOCK_SIZE:`STATE_SIZE-1]} : s_reg;
 
 PERMUTATION_CTRL_UNIT PERM_CTRL_CNT (
 	.CLK(CLK),
@@ -47,6 +49,16 @@ begin
 		  if(wait_for_n_mess == 1'b0)
 			s_reg	<=	rnd_out;
 end
+
+//always@(posedge CLK, posedge A_RST)
+//begin
+//	if(A_RST == 1'b1)
+//		initial_state_bef_first_word  <= 1'b1;
+//	else
+//		if(CE == 1'b1)
+		  
+			
+//end
 
 assign OUT = s_reg;
 
