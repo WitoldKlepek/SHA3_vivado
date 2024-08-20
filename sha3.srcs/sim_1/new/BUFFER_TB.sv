@@ -48,10 +48,10 @@ initial begin
     WRITE_EN        <=  1'b0;
     #50 WRITE_EN    <=  1'b1;
     WRITE_DATA      <=  32'h55555555;
-    #30 WRITE_DATA  <=  32'h66666666;
-    READ_EN         <=  1'b1;
+    #20 READ_EN         <= 1'b1;
     #10 READ_EN     <=  1'b0;
-    WRITE_DATA      <=  32'h77777777;
+    #10 WRITE_DATA  <=  32'h66666666;
+    #10 WRITE_DATA  <=  32'h77777777;
     #10 WRITE_DATA  <=  32'h88888888;
     #10 WRITE_EN    <=  1'b0;
     READ_EN         <=  1'b1;

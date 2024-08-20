@@ -12,7 +12,7 @@ module ROUND_CONSTANT_COUNTER(
 
 logic [0:`Z_WIDTH-1] out_reg;
 logic [0:4] twenty_four_counter;
-
+logic rst_rnd_const;
 
 //always @(posedge CLK or posedge A_RST)
 //begin
@@ -23,6 +23,8 @@ logic [0:4] twenty_four_counter;
 //			twenty_four_counter	<=	(twenty_four_counter == 5'h17) ? 0 : twenty_four_counter + 1;
 //		end
 //end
+
+//assign rst_rnd_const = A_RST || COUNTER_RESET;
 
 always @(posedge CLK or posedge A_RST)
 begin

@@ -10,8 +10,9 @@ module PERMUTATION_MODULE #(
 	input logic CLK,
 	input logic A_RST,
 	input logic CE,
-	input logic VALID_MESSAGE_FROM_PADDING
-	//output OUT_VALID
+	input logic VALID_MESSAGE_FROM_PADDING,
+	input logic LAST_MESSAGE_FROM_PADDING,
+	output logic HASH_VALID
 	);
 
 	
@@ -30,13 +31,28 @@ RND RND1(
 
 assign rnd_in = VALID_MESSAGE_FROM_PADDING ? {IN ^ s_reg[0:R_BLOCK_SIZE-1] ,s_reg[R_BLOCK_SIZE:`STATE_SIZE-1]} : s_reg;
 
+//always@(posedge CLK, posedge A_RST)
+//begin
+//    if(A_RST == 1'b1) begin
+//        rnd_in  <=  0;
+//    end
+//		else if(CE == 1'b1)
+//		  if(VALID_MESSAGE_FROM_PADDING == 1'b1)
+//		      rnd_in  <=  {IN ^ s_reg[0:R_BLOCK_SIZE-1] ,s_reg[R_BLOCK_SIZE:`STATE_SIZE-1]};
+//		  else
+//		      rnd_in  <=  s_reg;
+//end
+
+
 PERMUTATION_CTRL_UNIT PERM_CTRL_CNT (
 	.CLK(CLK),
 	.A_RST(A_RST),
 	.CE(CE),
 	.CONSTANT_VALUE(round_constant),
 	.VALID_NEW_MESSAGE_FROM_PADDING(VALID_MESSAGE_FROM_PADDING),
-	.WAIT_FOR_NEW_MESSAGE(wait_for_n_mess)
+	.WAIT_FOR_NEW_MESSAGE(wait_for_n_mess),
+	.LAST_MESSAGE_FROM_PADDING(LAST_MESSAGE_FROM_PADDING),
+	.HASH_VALID(HASH_VALID)
 	);
 	
 	

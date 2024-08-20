@@ -15,13 +15,13 @@ module PADDING_MODULE #(
     input logic [WRITE_DATA_WIDTH-1:0] WRITE_DATA,
     input logic WRITE_VALID,
     output logic [READ_DATA_WIDTH-1:0] READ_DATA,
-    output logic CTRL_READ_EN
+    output logic VALID_MESSAGE_FROM_PADDING,
+    output logic CTRL_LAST_MESSAGE_FROM_PADDING
 );
 
 logic [READ_DATA_WIDTH-1:0] buffer_out_padder_in;
 logic ctrl_read_en, ctrl_write_en;
 logic [PTR_SIZE-1:0] ctrl_padder_ptr;
-logic [READ_DATA_WIDTH-1:0] read_data_reg;
 logic [READ_DATA_WIDTH-1:0] padder_out;
 logic ctrl_buf_empty, ctrl_buf_full;
 
@@ -50,7 +50,19 @@ PADDER #(
     .PAD_PTR(ctrl_padder_ptr)
 );
 
-assign CTRL_READ_EN = ctrl_read_en;
+//assign CTRL_READ_EN = ctrl_read_en;
+always@(posedge CLK, posedge A_RST)
+begin
+    if(A_RST == 1'b1) begin
+        VALID_MESSAGE_FROM_PADDING  <=  1'b0;
+    end
+		else if(CE == 1'b1)
+		  if(ctrl_read_en == 1'b1)
+		      VALID_MESSAGE_FROM_PADDING  <= 1'b1;
+		  else
+		      VALID_MESSAGE_FROM_PADDING  <= 1'b0;
+end
+
 assign READ_DATA = padder_out;
 
 PADDING_CTRL_UNIT  #(
@@ -67,7 +79,6 @@ PADDING_CTRL_UNIT  #(
     .BUF_FULL(ctrl_buf_full)
 );
 
-assign READ_DATA = read_data_reg;
-
+assign CTRL_LAST_MESSAGE_FROM_PADDING = (ctrl_padder_ptr == 0) ? 1'b0 : 1'b1;
 
 endmodule

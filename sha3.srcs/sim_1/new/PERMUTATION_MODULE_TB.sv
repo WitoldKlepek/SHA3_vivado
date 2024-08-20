@@ -1,7 +1,4 @@
-
 `timescale 1ns / 1ps
-
-
 
 module PERMUTATION_MODULE_TB();
 
@@ -48,7 +45,9 @@ assign out = ConvertData1600(out_conv);
 
 initial begin
 	#0 $monitor("TIME = %0t \n in = %h \n in_conv = %h \n out = %h ",$time, in, in_conv, out);
-	#5 in	<= {{40'h53587B9901},{{R_BLOCK_SIZE-48}{1'b0}},{8'h80}};
+	   in  <=  {{R_BLOCK_SIZE/8}{8'b10100011}};
+	#380 in <= {{60{8'b10100011}},{8'b00000001},{82{8'b00000000}},{8'b10000000}};
+	//#5 in	<= {{40'h53587B9901},{{R_BLOCK_SIZE-48}{1'b0}},{8'h80}};
 end
 
 initial begin
@@ -63,6 +62,8 @@ initial begin
 	valid_mess = 1'b0;
 	#50 A_RST = 1'b0;
 	#50 valid_mess = 1'b1;
+	#10 valid_mess = 1'b0;
+	#300 valid_mess = 1'b1;
 	#10 valid_mess = 1'b0;
 	#300 $finish;
 end 
