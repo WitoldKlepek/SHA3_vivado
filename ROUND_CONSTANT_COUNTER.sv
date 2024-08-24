@@ -2,17 +2,17 @@
 `define Z_WIDTH 64
 
 module ROUND_CONSTANT_COUNTER(
-	input logic CLK,
-	input logic A_RST,
-	input logic CE,
+	//input logic CLK,
+	//input logic A_RST,
+	//input logic CE,
 	output logic [0:`Z_WIDTH-1] CONSTANT_VALUE,
-	input logic COUNTER_RESET,
-	output logic WAIT_FOR_NEW_MESSAGE
+	input logic [4:0]  COUNTER
+	//output logic WAIT_FOR_NEW_MESSAGE
 	);
 
 logic [0:`Z_WIDTH-1] out_reg;
-logic [0:4] twenty_four_counter;
-logic rst_rnd_const;
+//logic [0:4] twenty_four_counter;
+//logic rst_rnd_const;
 
 //always @(posedge CLK or posedge A_RST)
 //begin
@@ -26,27 +26,27 @@ logic rst_rnd_const;
 
 //assign rst_rnd_const = A_RST || COUNTER_RESET;
 
-always @(posedge CLK or posedge A_RST)
-begin
-	if (A_RST == 1'b1) begin
-	   twenty_four_counter	<=	0;
-	   WAIT_FOR_NEW_MESSAGE <=  1'b1;
-	end else begin
-		if(CE == 1'b1) begin
-		    if(COUNTER_RESET == 1'b1) begin
-		          twenty_four_counter     <=  0;
-		          WAIT_FOR_NEW_MESSAGE    <=  1'b0;
-		    end else if(twenty_four_counter == 23) begin
-		          WAIT_FOR_NEW_MESSAGE    <=  1'b1;
-		    end else
-			      twenty_four_counter	<=	twenty_four_counter + 1;
-		end
-	end
-end
+//always @(posedge CLK or posedge A_RST)
+//begin
+//	if (A_RST == 1'b1) begin
+//	   twenty_four_counter	<=	0;
+//	   WAIT_FOR_NEW_MESSAGE <=  1'b1;
+//	end else begin
+//		if(CE == 1'b1) begin
+//		    if(COUNTER_RESET == 1'b1) begin
+//		          twenty_four_counter     <=  0;
+//		          WAIT_FOR_NEW_MESSAGE    <=  1'b0;
+//		    end else if(twenty_four_counter == 23) begin
+//		          WAIT_FOR_NEW_MESSAGE    <=  1'b1;
+//		    end else
+//			      twenty_four_counter	<=	twenty_four_counter + 1;
+//		end
+//	end
+//end
 
 always_comb
 begin
-    case(twenty_four_counter)
+    case(COUNTER)
 	    5'b00000 : out_reg	=	`Z_WIDTH'h0000000000000001;	
 		5'b00001 : out_reg	=	`Z_WIDTH'h0000000000008082;
 		5'b00010 : out_reg	=	`Z_WIDTH'h800000000000808a;
