@@ -117,7 +117,7 @@ begin
             case(STATE)
                 INIT : begin
                     read_en_counter     <= 0;
-                    pad_ptr_counter     <= 1;
+                    pad_ptr_counter     <= 0;
                 end
                 COUNTING : begin
                     read_en_counter     <= read_en_counter + 1;
@@ -126,7 +126,7 @@ begin
                 end            
                 READ_NEXT : begin
                     read_en_counter     <= 0;
-                    pad_ptr_counter     <= 1;
+                    pad_ptr_counter     <= IN_OUT_RATIO;
                 end
             endcase
         end
@@ -167,7 +167,7 @@ begin
     end
        else if(CE == 1'b1) begin
                 if(STATE == READ_NEXT) 
-                    if(read_en_counter == pad_ptr_counter - 1)
+                    if(IN_OUT_RATIO - 1 == pad_ptr_counter)
                         CTRL_PAD_PTR    <=  0;
                     else
                         CTRL_PAD_PTR    <=  pad_ptr_counter;

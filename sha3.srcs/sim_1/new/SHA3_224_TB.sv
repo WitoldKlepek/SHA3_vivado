@@ -40,8 +40,11 @@ end
 
 initial begin
     #0 data_in_seq      =  {4{8'hF0}};
-    #150 data_in_seq    =  {4{8'hA3}};
+    #150 data_in_seq    =  {4{8'hC5}};
+    //#10 data_in_seq    =  {4{8'hC4}};
+    //#10 data_in_seq    =  {4{8'hC5}};
     #500 data_in_seq   =   {4{8'hF0}};
+    //#500 data_in_seq   =   {4{8'hF0}};
 end
 
 endmodule

@@ -50,12 +50,15 @@ PERMUTATION_MODULE #(
     .LAST_MESSAGE_FROM_PADDING(last_mess) 
 ); 
 
-genvar i;
-generate
-    for(i=0; i < PERMUTATION_INPUT_WORD_WIDTH; i++) begin
-        assign permutation_in[i] = padding_out[PERMUTATION_INPUT_WORD_WIDTH - i - 1];
-    end
-endgenerate
+//genvar i;
+//generate
+//    for(i=0; i < PERMUTATION_INPUT_WORD_WIDTH; i++) begin
+//        assign permutation_in[i] = padding_out[PERMUTATION_INPUT_WORD_WIDTH - i - 1];
+//    end
+//endgenerate
+
+
+assign permutation_in = padding_out;
 
 assign HASH_OUT = output_reg[PERMUTATION_INPUT_WORD_WIDTH-1:PERMUTATION_INPUT_WORD_WIDTH-1-OUTPUT_HASH_SIZE];
 
