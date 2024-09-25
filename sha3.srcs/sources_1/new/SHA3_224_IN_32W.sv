@@ -1,11 +1,11 @@
 `timescale 1ns / 1ps
 `define BUFFER_DEPTH 128
-
+`define PERMUTATION_WIDTH 1600
 
 module SHA3_224_IN_32W #(
     localparam DATA_INPUT_WIDTH = 32,
     localparam OUTPUT_HASH_SIZE = 224,
-    localparam PERMUTATION_INPUT_WORD_WIDTH = 1600 - 2 * OUTPUT_HASH_SIZE
+    localparam PERMUTATION_INPUT_WORD_WIDTH = `PERMUTATION_WIDTH - 2 * OUTPUT_HASH_SIZE
     //,localparam CLK_CYCLES_TO_COLLECT_DATA = PERMUTATION_INPUT_WORD_WIDTH / DATA_INPUT_WIDTH  
 )   (
     input logic [DATA_INPUT_WIDTH-1:0] DATA_IN_SEQ,
@@ -19,7 +19,7 @@ module SHA3_224_IN_32W #(
 
 logic [PERMUTATION_INPUT_WORD_WIDTH-1:0] padding_out, permutation_in;
 logic valid_mess;
-logic [PERMUTATION_INPUT_WORD_WIDTH-1:0] output_reg;
+logic [`PERMUTATION_WIDTH-1:0] output_reg;
 logic last_mess;
 
 PADDING_MODULE  #(
@@ -38,7 +38,7 @@ PADDING_MODULE  #(
 );
 
 PERMUTATION_MODULE #(
-
+    .R_BLOCK_SIZE(PERMUTATION_INPUT_WORD_WIDTH)
 )   PERMUTATION_PART (
     .CLK(CLK),
     .A_RST(A_RST),
@@ -60,6 +60,13 @@ PERMUTATION_MODULE #(
 
 assign permutation_in = padding_out;
 
-assign HASH_OUT = output_reg[PERMUTATION_INPUT_WORD_WIDTH-1:PERMUTATION_INPUT_WORD_WIDTH-1-OUTPUT_HASH_SIZE];
+//assign HASH_OUT = output_reg[PERMUTATION_INPUT_WORD_WIDTH-1:PERMUTATION_INPUT_WORD_WIDTH-1-OUTPUT_HASH_SIZE];
+
+genvar i;
+generate
+    for (i = 0; i < OUTPUT_HASH_SIZE; i = i +1) begin
+        assign HASH_OUT[OUTPUT_HASH_SIZE - 1 - i] = output_reg[`PERMUTATION_WIDTH - 1 - i];
+    end
+endgenerate
 
 endmodule

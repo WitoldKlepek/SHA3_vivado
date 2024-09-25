@@ -41,4 +41,4 @@ EAStep()
      fi
 }
 
-EAStep vivado -log BUFFER.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source BUFFER.tcl
+EAStep vivado -log SHA3_256_IN_32W.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source SHA3_256_IN_32W.tcl

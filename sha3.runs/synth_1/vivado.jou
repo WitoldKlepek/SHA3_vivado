@@ -3,12 +3,12 @@
 # SW Build 4029153 on Fri Oct 13 20:14:34 MDT 2023
 # IP Build 4028589 on Sat Oct 14 00:45:43 MDT 2023
 # SharedData Build 4025554 on Tue Oct 10 17:18:54 MDT 2023
-# Start of session at: Thu Jun 13 22:22:44 2024
-# Process ID: 15640
+# Start of session at: Wed Sep 25 12:03:52 2024
+# Process ID: 15032
 # Current directory: D:/vivado_projects/sha3/SHA3_vivado/sha3.runs/synth_1
-# Command line: vivado.exe -log BUFFER.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source BUFFER.tcl
-# Log file: D:/vivado_projects/sha3/SHA3_vivado/sha3.runs/synth_1/BUFFER.vds
+# Command line: vivado.exe -log SHA3_256_IN_32W.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source SHA3_256_IN_32W.tcl
+# Log file: D:/vivado_projects/sha3/SHA3_vivado/sha3.runs/synth_1/SHA3_256_IN_32W.vds
 # Journal file: D:/vivado_projects/sha3/SHA3_vivado/sha3.runs/synth_1\vivado.jou
 # Running On: WitekK, OS: Windows, CPU Frequency: 2496 MHz, CPU Physical cores: 6, Host memory: 34164 MB
 #-----------------------------------------------------------
-source BUFFER.tcl -notrace
+source SHA3_256_IN_32W.tcl -notrace

@@ -30,7 +30,7 @@ module PADDER #(
 //    end
 //end
 
-genvar i;
+/*genvar i;
 generate
     for(i = 0; i < RATIO; i = i + 1) begin
         //generating a padded (or not) responde, bit width a same like in a permutation module input
@@ -58,7 +58,21 @@ generate
                 //and finishing padding
                 );   
     end
-endgenerate
+endgenerate*/
 //to check !!!! 03 07 2024
+
+genvar i;
+generate
+    for(i = 0; i < RATIO; i = i + 1) begin
+        assign PADDER_OUT[(i+1)*DATA_PART_WIDTH-1:i*DATA_PART_WIDTH] = 
+            i >= PAD_PTR ? PADDER_IN[(i+1)*DATA_PART_WIDTH-1:i*DATA_PART_WIDTH]
+                : (i == PAD_PTR - 1 ?
+                    (PAD_PTR == 1   ? {1'b0,2'b11,{(DATA_PART_WIDTH-4){1'b0}},1'b1}              
+                    : {1'b0, 2'b11,{(DATA_PART_WIDTH-3){1'b0}}})    
+                : (i == 0 ? {{(DATA_PART_WIDTH-1){1'b0}},1'b1}
+                : {DATA_PART_WIDTH{1'b0}})
+                );   
+    end
+endgenerate
 
 endmodule

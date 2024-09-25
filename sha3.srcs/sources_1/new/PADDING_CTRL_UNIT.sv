@@ -111,22 +111,22 @@ always@(posedge CLK, posedge A_RST)
 begin
     if(A_RST == 1'b1) begin
         read_en_counter     <= 0;
-        pad_ptr_counter     <= 0;
+        pad_ptr_counter     <= IN_OUT_RATIO - 1;
     end
         else if(CE == 1'b1) begin
             case(STATE)
                 INIT : begin
                     read_en_counter     <= 0;
-                    pad_ptr_counter     <= 0;
+                    pad_ptr_counter     <= IN_OUT_RATIO - 1;
                 end
                 COUNTING : begin
                     read_en_counter     <= read_en_counter + 1;
                     if(DATA_IN_VALID == 1'b1) 
-                        pad_ptr_counter     <= pad_ptr_counter + 1;
+                        pad_ptr_counter     <= pad_ptr_counter - 1;
                 end            
                 READ_NEXT : begin
                     read_en_counter     <= 0;
-                    pad_ptr_counter     <= IN_OUT_RATIO;
+                    pad_ptr_counter     <= IN_OUT_RATIO - 1;
                 end
             endcase
         end
@@ -167,7 +167,7 @@ begin
     end
        else if(CE == 1'b1) begin
                 if(STATE == READ_NEXT) 
-                    if(IN_OUT_RATIO - 1 == pad_ptr_counter)
+                    if(pad_ptr_counter == 0)
                         CTRL_PAD_PTR    <=  0;
                     else
                         CTRL_PAD_PTR    <=  pad_ptr_counter;

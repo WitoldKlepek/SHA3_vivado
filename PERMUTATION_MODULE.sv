@@ -18,7 +18,6 @@ module PERMUTATION_MODULE #(
 	
 logic [0:`STATE_SIZE-1]  rnd_out;
 logic [0:`STATE_SIZE-1] rnd_in, s_reg;
-logic first_rnd;
 logic [0:`Z_WIDTH-1] round_constant;
 logic wait_for_n_mess;
 //logic initial_state_bef_first_word;

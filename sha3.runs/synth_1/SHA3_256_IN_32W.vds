@@ -1,0 +1,319 @@
+#-----------------------------------------------------------
+# Vivado v2023.2 (64-bit)
+# SW Build 4029153 on Fri Oct 13 20:14:34 MDT 2023
+# IP Build 4028589 on Sat Oct 14 00:45:43 MDT 2023
+# SharedData Build 4025554 on Tue Oct 10 17:18:54 MDT 2023
+# Start of session at: Wed Sep 25 12:03:52 2024
+# Process ID: 15032
+# Current directory: D:/vivado_projects/sha3/SHA3_vivado/sha3.runs/synth_1
+# Command line: vivado.exe -log SHA3_256_IN_32W.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source SHA3_256_IN_32W.tcl
+# Log file: D:/vivado_projects/sha3/SHA3_vivado/sha3.runs/synth_1/SHA3_256_IN_32W.vds
+# Journal file: D:/vivado_projects/sha3/SHA3_vivado/sha3.runs/synth_1\vivado.jou
+# Running On: WitekK, OS: Windows, CPU Frequency: 2496 MHz, CPU Physical cores: 6, Host memory: 34164 MB
+#-----------------------------------------------------------
+source SHA3_256_IN_32W.tcl -notrace
+create_project: Time (s): cpu = 00:00:05 ; elapsed = 00:00:08 . Memory (MB): peak = 476.277 ; gain = 182.043
+Command: synth_design -top SHA3_256_IN_32W -part xc7z020clg484-1
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7z020'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7z020'
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 15008
+---------------------------------------------------------------------------------
+Starting Synthesize : Time (s): cpu = 00:00:05 ; elapsed = 00:00:08 . Memory (MB): peak = 921.277 ; gain = 442.070
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'SHA3_256_IN_32W' [D:/vivado_projects/sha3/SHA3_vivado/sha3.srcs/sources_1/new/SHA3_256_IN_32W.sv:5]
+INFO: [Synth 8-6157] synthesizing module 'PADDING_MODULE' [D:/vivado_projects/sha3/SHA3_vivado/sha3.srcs/sources_1/new/PADDING_MODULE.sv:5]
+	Parameter WRITE_DATA_WIDTH bound to: 32 - type: integer 
+	Parameter READ_DATA_WIDTH bound to: 1088 - type: integer 
+	Parameter DEPTH bound to: 128 - type: integer 
+INFO: [Synth 8-6157] synthesizing module 'BUFFER' [D:/vivado_projects/sha3/SHA3_vivado/sha3.srcs/sources_1/new/BUFFER.sv:3]
+	Parameter WRITE_DATA_WIDTH bound to: 32 - type: integer 
+	Parameter READ_DATA_WIDTH bound to: 1088 - type: integer 
+	Parameter DEPTH bound to: 128 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'BUFFER' (0#1) [D:/vivado_projects/sha3/SHA3_vivado/sha3.srcs/sources_1/new/BUFFER.sv:3]
+INFO: [Synth 8-6157] synthesizing module 'PADDER' [D:/vivado_projects/sha3/SHA3_vivado/sha3.srcs/sources_1/new/PADDER.sv:4]
+	Parameter DATA_WIDTH bound to: 1088 - type: integer 
+	Parameter DATA_PART_WIDTH bound to: 32 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'PADDER' (0#1) [D:/vivado_projects/sha3/SHA3_vivado/sha3.srcs/sources_1/new/PADDER.sv:4]
+INFO: [Synth 8-6157] synthesizing module 'PADDING_CTRL_UNIT' [D:/vivado_projects/sha3/SHA3_vivado/sha3.srcs/sources_1/new/PADDING_CTRL_UNIT.sv:5]
+	Parameter IN_OUT_RATIO bound to: 34 - type: integer 
+INFO: [Synth 8-155] case statement is not full and has no default [D:/vivado_projects/sha3/SHA3_vivado/sha3.srcs/sources_1/new/PADDING_CTRL_UNIT.sv:117]
+INFO: [Synth 8-6155] done synthesizing module 'PADDING_CTRL_UNIT' (0#1) [D:/vivado_projects/sha3/SHA3_vivado/sha3.srcs/sources_1/new/PADDING_CTRL_UNIT.sv:5]
+INFO: [Synth 8-6155] done synthesizing module 'PADDING_MODULE' (0#1) [D:/vivado_projects/sha3/SHA3_vivado/sha3.srcs/sources_1/new/PADDING_MODULE.sv:5]
+INFO: [Synth 8-6157] synthesizing module 'PERMUTATION_MODULE' [D:/vivado_projects/sha3/SHA3_vivado/PERMUTATION_MODULE.sv:5]
+	Parameter R_BLOCK_SIZE bound to: 1088 - type: integer 
+INFO: [Synth 8-6157] synthesizing module 'RND' [D:/vivado_projects/sha3/SHA3_vivado/RND.sv:5]
+INFO: [Synth 8-6157] synthesizing module 'THETA' [D:/vivado_projects/sha3/SHA3_vivado/THETA.sv:6]
+INFO: [Synth 8-6157] synthesizing module 'THETA_column' [D:/vivado_projects/sha3/SHA3_vivado/THETA_column.sv:3]
+INFO: [Synth 8-6155] done synthesizing module 'THETA_column' (0#1) [D:/vivado_projects/sha3/SHA3_vivado/THETA_column.sv:3]
+INFO: [Synth 8-6155] done synthesizing module 'THETA' (0#1) [D:/vivado_projects/sha3/SHA3_vivado/THETA.sv:6]
+INFO: [Synth 8-6157] synthesizing module 'RHO' [D:/vivado_projects/sha3/SHA3_vivado/RHO.sv:6]
+INFO: [Synth 8-6155] done synthesizing module 'RHO' (0#1) [D:/vivado_projects/sha3/SHA3_vivado/RHO.sv:6]
+INFO: [Synth 8-6157] synthesizing module 'PI' [D:/vivado_projects/sha3/SHA3_vivado/PI.sv:5]
+INFO: [Synth 8-6155] done synthesizing module 'PI' (0#1) [D:/vivado_projects/sha3/SHA3_vivado/PI.sv:5]
+INFO: [Synth 8-6157] synthesizing module 'CHI' [D:/vivado_projects/sha3/SHA3_vivado/CHI.sv:5]
+INFO: [Synth 8-6157] synthesizing module 'CHI_row' [D:/vivado_projects/sha3/SHA3_vivado/CHI_row.sv:3]
+INFO: [Synth 8-6155] done synthesizing module 'CHI_row' (0#1) [D:/vivado_projects/sha3/SHA3_vivado/CHI_row.sv:3]
+INFO: [Synth 8-6155] done synthesizing module 'CHI' (0#1) [D:/vivado_projects/sha3/SHA3_vivado/CHI.sv:5]
+INFO: [Synth 8-6157] synthesizing module 'IOTA' [D:/vivado_projects/sha3/SHA3_vivado/IOTA.sv:5]
+INFO: [Synth 8-6155] done synthesizing module 'IOTA' (0#1) [D:/vivado_projects/sha3/SHA3_vivado/IOTA.sv:5]
+INFO: [Synth 8-6155] done synthesizing module 'RND' (0#1) [D:/vivado_projects/sha3/SHA3_vivado/RND.sv:5]
+INFO: [Synth 8-6157] synthesizing module 'PERMUTATION_CTRL_UNIT' [D:/vivado_projects/sha3/SHA3_vivado/sha3.srcs/sources_1/new/PERMUTATION_CTRL_UNIT.sv:4]
+INFO: [Synth 8-6157] synthesizing module 'ROUND_CONSTANT_COUNTER' [D:/vivado_projects/sha3/SHA3_vivado/ROUND_CONSTANT_COUNTER.sv:4]
+INFO: [Synth 8-6155] done synthesizing module 'ROUND_CONSTANT_COUNTER' (0#1) [D:/vivado_projects/sha3/SHA3_vivado/ROUND_CONSTANT_COUNTER.sv:4]
+INFO: [Synth 8-6155] done synthesizing module 'PERMUTATION_CTRL_UNIT' (0#1) [D:/vivado_projects/sha3/SHA3_vivado/sha3.srcs/sources_1/new/PERMUTATION_CTRL_UNIT.sv:4]
+INFO: [Synth 8-6155] done synthesizing module 'PERMUTATION_MODULE' (0#1) [D:/vivado_projects/sha3/SHA3_vivado/PERMUTATION_MODULE.sv:5]
+WARNING: [Synth 8-689] width (1601) of port connection 'OUT' does not match port width (1600) of module 'PERMUTATION_MODULE' [D:/vivado_projects/sha3/SHA3_vivado/sha3.srcs/sources_1/new/SHA3_256_IN_32W.sv:47]
+INFO: [Synth 8-6155] done synthesizing module 'SHA3_256_IN_32W' (0#1) [D:/vivado_projects/sha3/SHA3_vivado/sha3.srcs/sources_1/new/SHA3_256_IN_32W.sv:5]
+WARNING: [Synth 8-7129] Port BUF_EMPTY in module PADDING_CTRL_UNIT is either unconnected or has no load
+---------------------------------------------------------------------------------
+Finished Synthesize : Time (s): cpu = 00:00:08 ; elapsed = 00:00:14 . Memory (MB): peak = 1095.008 ; gain = 615.801
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:09 ; elapsed = 00:00:15 . Memory (MB): peak = 1095.008 ; gain = 615.801
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7z020clg484-1
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:09 ; elapsed = 00:00:15 . Memory (MB): peak = 1095.008 ; gain = 615.801
+---------------------------------------------------------------------------------
+INFO: [Device 21-403] Loading part xc7z020clg484-1
+INFO: [Synth 8-802] inferred FSM for state register 'STATE_reg' in module 'PADDING_CTRL_UNIT'
+INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'PERMUTATION_CTRL_UNIT'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                    INIT |                              001 | 00000000000000000000000000000000
+                COUNTING |                              010 | 00000000000000000000000000000001
+               READ_NEXT |                              100 | 00000000000000000000000000000010
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'STATE_reg' using encoding 'one-hot' in module 'PADDING_CTRL_UNIT'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                    INIT |                             0001 | 00000000000000000000000000000000
+                COUNTING |                             0010 | 00000000000000000000000000000010
+                   VALID |                             0100 | 00000000000000000000000000000100
+      WAIT_FOR_NEXT_MESS |                             1000 | 00000000000000000000000000000011
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 'one-hot' in module 'PERMUTATION_CTRL_UNIT'
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:33 ; elapsed = 00:00:58 . Memory (MB): peak = 1434.684 ; gain = 955.477
+---------------------------------------------------------------------------------
+No constraint files found.
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input    8 Bit       Adders := 2     
+	   2 Input    7 Bit       Adders := 1     
+	   2 Input    6 Bit       Adders := 2     
+	   2 Input    5 Bit       Adders := 1     
++---XORs : 
+	   2 Input   1088 Bit         XORs := 1     
+	   2 Input      1 Bit         XORs := 3584  
++---XORs : 
+	                5 Bit    Wide XORs := 320   
++---Registers : 
+	             1600 Bit    Registers := 1     
+	             1088 Bit    Registers := 1     
+	               32 Bit    Registers := 3     
+	                8 Bit    Registers := 2     
+	                6 Bit    Registers := 2     
+	                5 Bit    Registers := 1     
+	                1 Bit    Registers := 1     
++---Muxes : 
+	   2 Input 1600 Bit        Muxes := 1     
+	   2 Input   32 Bit        Muxes := 36    
+	   3 Input   32 Bit        Muxes := 5     
+	   2 Input   31 Bit        Muxes := 35    
+	   3 Input    6 Bit        Muxes := 2     
+	   2 Input    6 Bit        Muxes := 1     
+	   2 Input    5 Bit        Muxes := 1     
+	   4 Input    5 Bit        Muxes := 1     
+	   4 Input    4 Bit        Muxes := 1     
+	   2 Input    4 Bit        Muxes := 1     
+	   3 Input    3 Bit        Muxes := 1     
+	   2 Input    3 Bit        Muxes := 1     
+	 128 Input    2 Bit        Muxes := 5     
+	   2 Input    1 Bit        Muxes := 6     
+	   3 Input    1 Bit        Muxes := 4     
+	   4 Input    1 Bit        Muxes := 2     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 220 (col length:60)
+BRAMs: 280 (col length: RAMB18 60 RAMB36 30)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+No constraint files found.
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-7080] Parallel synthesis criteria is not met
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 1st driver pin 'PADDING_PART/pad_ctrl_unit/read_en_counter_reg[5]/Q' [D:/vivado_projects/sha3/SHA3_vivado/sha3.srcs/sources_1/new/PADDING_CTRL_UNIT.sv:113]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 2nd driver pin 'GND' [D:/vivado_projects/sha3/SHA3_vivado/sha3.srcs/sources_1/new/PADDING_CTRL_UNIT.sv:113]
+CRITICAL WARNING: [Synth 8-6858] multi-driven net Q is connected to at least one constant driver which has been preserved, other driver is ignored [D:/vivado_projects/sha3/SHA3_vivado/sha3.srcs/sources_1/new/PADDING_CTRL_UNIT.sv:113]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 1st driver pin 'PADDING_PART/pad_ctrl_unit/read_en_counter_reg[3]/Q' [D:/vivado_projects/sha3/SHA3_vivado/sha3.srcs/sources_1/new/PADDING_CTRL_UNIT.sv:113]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 2nd driver pin 'GND' [D:/vivado_projects/sha3/SHA3_vivado/sha3.srcs/sources_1/new/PADDING_CTRL_UNIT.sv:113]
+CRITICAL WARNING: [Synth 8-6858] multi-driven net Q is connected to at least one constant driver which has been preserved, other driver is ignored [D:/vivado_projects/sha3/SHA3_vivado/sha3.srcs/sources_1/new/PADDING_CTRL_UNIT.sv:113]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 1st driver pin 'PADDING_PART/pad_ctrl_unit/read_en_counter_reg[2]/Q' [D:/vivado_projects/sha3/SHA3_vivado/sha3.srcs/sources_1/new/PADDING_CTRL_UNIT.sv:113]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 2nd driver pin 'GND' [D:/vivado_projects/sha3/SHA3_vivado/sha3.srcs/sources_1/new/PADDING_CTRL_UNIT.sv:113]
+CRITICAL WARNING: [Synth 8-6858] multi-driven net Q is connected to at least one constant driver which has been preserved, other driver is ignored [D:/vivado_projects/sha3/SHA3_vivado/sha3.srcs/sources_1/new/PADDING_CTRL_UNIT.sv:113]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 1st driver pin 'PADDING_PART/pad_ctrl_unit/read_en_counter_reg[1]/Q' [D:/vivado_projects/sha3/SHA3_vivado/sha3.srcs/sources_1/new/PADDING_CTRL_UNIT.sv:113]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 2nd driver pin 'GND' [D:/vivado_projects/sha3/SHA3_vivado/sha3.srcs/sources_1/new/PADDING_CTRL_UNIT.sv:113]
+CRITICAL WARNING: [Synth 8-6858] multi-driven net Q is connected to at least one constant driver which has been preserved, other driver is ignored [D:/vivado_projects/sha3/SHA3_vivado/sha3.srcs/sources_1/new/PADDING_CTRL_UNIT.sv:113]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 1st driver pin 'PADDING_PART/pad_ctrl_unit/read_en_counter_reg[4]__0/Q' [D:/vivado_projects/sha3/SHA3_vivado/sha3.srcs/sources_1/new/PADDING_CTRL_UNIT.sv:99]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 2nd driver pin 'GND' [D:/vivado_projects/sha3/SHA3_vivado/sha3.srcs/sources_1/new/PADDING_CTRL_UNIT.sv:99]
+CRITICAL WARNING: [Synth 8-6858] multi-driven net Q is connected to at least one constant driver which has been preserved, other driver is ignored [D:/vivado_projects/sha3/SHA3_vivado/sha3.srcs/sources_1/new/PADDING_CTRL_UNIT.sv:99]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 1st driver pin 'PADDING_PART/pad_ctrl_unit/read_en_counter_reg[0]__0/Q' [D:/vivado_projects/sha3/SHA3_vivado/sha3.srcs/sources_1/new/PADDING_CTRL_UNIT.sv:99]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 2nd driver pin 'GND' [D:/vivado_projects/sha3/SHA3_vivado/sha3.srcs/sources_1/new/PADDING_CTRL_UNIT.sv:99]
+CRITICAL WARNING: [Synth 8-6858] multi-driven net Q is connected to at least one constant driver which has been preserved, other driver is ignored [D:/vivado_projects/sha3/SHA3_vivado/sha3.srcs/sources_1/new/PADDING_CTRL_UNIT.sv:99]
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:01:03 ; elapsed = 00:01:54 . Memory (MB): peak = 1460.945 ; gain = 981.738
+---------------------------------------------------------------------------------
+No constraint files found.
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:01:05 ; elapsed = 00:01:57 . Memory (MB): peak = 1460.945 ; gain = 981.738
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:01:06 ; elapsed = 00:01:59 . Memory (MB): peak = 1460.945 ; gain = 981.738
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:01:09 ; elapsed = 00:02:05 . Memory (MB): peak = 1460.945 ; gain = 981.738
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:01:09 ; elapsed = 00:02:05 . Memory (MB): peak = 1460.945 ; gain = 981.738
+---------------------------------------------------------------------------------
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin PADDING_PART/ctrl_read_en with 1st driver pin 'PADDING_PART/pad_ctrl_unit/CTRL_BUF_READ_EN_reg/Q' [D:/vivado_projects/sha3/SHA3_vivado/sha3.srcs/sources_1/new/PADDING_CTRL_UNIT.sv:103]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin PADDING_PART/ctrl_read_en with 2nd driver pin 'PADDING_PART/pad_ctrl_unit/CTRL_BUF_READ_EN_reg__0/Q' [D:/vivado_projects/sha3/SHA3_vivado/sha3.srcs/sources_1/new/PADDING_CTRL_UNIT.sv:86]
+
+Report Check Netlist: 
++------+------------------+-------+---------+-------+------------------+
+|      |Item              |Errors |Warnings |Status |Description       |
++------+------------------+-------+---------+-------+------------------+
+|1     |multi_driven_nets |      0|        1|Failed |Multi driven nets |
++------+------------------+-------+---------+-------+------------------+
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:01:09 ; elapsed = 00:02:05 . Memory (MB): peak = 1460.945 ; gain = 981.738
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:01:09 ; elapsed = 00:02:05 . Memory (MB): peak = 1460.945 ; gain = 981.738
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:01:09 ; elapsed = 00:02:06 . Memory (MB): peak = 1460.945 ; gain = 981.738
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:01:09 ; elapsed = 00:02:06 . Memory (MB): peak = 1460.945 ; gain = 981.738
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+-----+------+
+|      |Cell |Count |
++------+-----+------+
+|1     |BUFG |     1|
+|2     |LUT1 |     6|
+|3     |LUT2 |    15|
+|4     |LUT3 |  1931|
+|5     |LUT4 |   836|
+|6     |LUT5 |  1383|
+|7     |LUT6 |   254|
+|8     |FDCE |  2191|
+|9     |FDPE |     4|
+|10    |FDRE |    33|
+|11    |IBUF |    36|
+|12    |OBUF |   257|
++------+-----+------+
+
+Report Instance Areas: 
++------+-------------------+----------------------+------+
+|      |Instance           |Module                |Cells |
++------+-------------------+----------------------+------+
+|1     |top                |                      |  6947|
+|2     |  PADDING_PART     |PADDING_MODULE        |  3044|
+|3     |    buffer1        |BUFFER                |  1707|
+|4     |    pad_ctrl_unit  |PADDING_CTRL_UNIT     |  1335|
+|5     |  PERMUTATION_PART |PERMUTATION_MODULE    |  3609|
+|6     |    PERM_CTRL_CNT  |PERMUTATION_CTRL_UNIT |    28|
+|7     |    RND1           |RND                   |   443|
+|8     |      T            |THETA                 |   443|
++------+-------------------+----------------------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:01:09 ; elapsed = 00:02:06 . Memory (MB): peak = 1460.945 ; gain = 981.738
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 20 critical warnings and 3 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:01:09 ; elapsed = 00:02:06 . Memory (MB): peak = 1460.945 ; gain = 981.738
+Synthesis Optimization Complete : Time (s): cpu = 00:01:09 ; elapsed = 00:02:06 . Memory (MB): peak = 1460.945 ; gain = 981.738
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.136 . Memory (MB): peak = 1467.746 ; gain = 0.000
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.002 . Memory (MB): peak = 1493.461 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Synth Design complete | Checksum: 5b7e5d2b
+INFO: [Common 17-83] Releasing license: Synthesis
+47 Infos, 3 Warnings, 20 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:01:11 ; elapsed = 00:02:10 . Memory (MB): peak = 1493.461 ; gain = 1017.184
+INFO: [runtcl-6] Synthesis results are not added to the cache due to CRITICAL_WARNING
+Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.018 . Memory (MB): peak = 1493.461 ; gain = 0.000
+INFO: [Common 17-1381] The checkpoint 'D:/vivado_projects/sha3/SHA3_vivado/sha3.runs/synth_1/SHA3_256_IN_32W.dcp' has been generated.
+INFO: [runtcl-4] Executing : report_utilization -file SHA3_256_IN_32W_utilization_synth.rpt -pb SHA3_256_IN_32W_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Wed Sep 25 12:06:14 2024...
