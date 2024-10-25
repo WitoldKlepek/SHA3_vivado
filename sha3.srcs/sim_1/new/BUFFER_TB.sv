@@ -12,7 +12,7 @@ logic FULL, EMPTY;
 BUFFER #(
     .WRITE_DATA_WIDTH(32),
     .READ_DATA_WIDTH(128),
-    .DEPTH(16)
+    .DEPTH(2)
 )   UUT (
     .CLK(CLK),
     .CE(CE),
@@ -55,7 +55,7 @@ initial begin
     #10 WRITE_DATA  <=  32'h88888888;
     #10 WRITE_EN    <=  1'b0;
     READ_EN         <=  1'b1;
-    #10 READ_EN     <=  1'b0;
+    #10 READ_EN     <=  1'b0;       
     #100 $finish; 
 end
 

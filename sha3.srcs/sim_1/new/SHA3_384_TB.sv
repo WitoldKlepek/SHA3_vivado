@@ -32,19 +32,23 @@ initial begin
     data_in_valid   =  1'b0;
     #50 a_rst   =  1'b0;
     #50 ce      =  1'b1;
-    #50 data_in_valid =1'b1;
+    #50 data_in_valid = 1'b1;
     #500 data_in_valid =1'b0;
+    //#50 data_in_valid = 1'b1;
+    //#500 data_in_valid = 1'b0;
     #1000 $finish;
     
 end
 
 initial begin
-    #0 data_in_seq      =  {4{8'hF0}};
-    #150 data_in_seq    =  {4{8'hC5}};
+    #0 data_in_seq          =  {4{8'hF0}};
+    #150 data_in_seq        =  {4{8'hC5}};
     //#10 data_in_seq    =  {4{8'hC4}};
     //#10 data_in_seq    =  {4{8'hC5}};
-    #500 data_in_seq   =   {4{8'hF0}};
+    #500 data_in_seq        = {4{8'hF0}};
     //#500 data_in_seq   =   {4{8'hF0}};
+    //#50 data_in_seq         = {32'h89ABCDEF} ;
+    //#500 data_in_seq        = {4{8'hF0}};
 end
 
 endmodule

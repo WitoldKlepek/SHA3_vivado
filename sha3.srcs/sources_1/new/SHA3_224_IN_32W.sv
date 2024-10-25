@@ -5,8 +5,9 @@
 module SHA3_224_IN_32W #(
     localparam DATA_INPUT_WIDTH = 32,
     localparam OUTPUT_HASH_SIZE = 224,
-    localparam PERMUTATION_INPUT_WORD_WIDTH = `PERMUTATION_WIDTH - 2 * OUTPUT_HASH_SIZE
-    //,localparam CLK_CYCLES_TO_COLLECT_DATA = PERMUTATION_INPUT_WORD_WIDTH / DATA_INPUT_WIDTH  
+    localparam PERMUTATION_INPUT_WORD_WIDTH = `PERMUTATION_WIDTH - 2 * OUTPUT_HASH_SIZE,
+    localparam IN_OUT_RATIO = PERMUTATION_INPUT_WORD_WIDTH/DATA_INPUT_WIDTH
+    //localparam CLK_CYCLES_TO_COLLECT_DATA = PERMUTATION_INPUT_WORD_WIDTH / DATA_INPUT_WIDTH  
 )   (
     input logic [DATA_INPUT_WIDTH-1:0] DATA_IN_SEQ,
     output logic [OUTPUT_HASH_SIZE-1:0] HASH_OUT,
@@ -20,12 +21,12 @@ module SHA3_224_IN_32W #(
 logic [PERMUTATION_INPUT_WORD_WIDTH-1:0] padding_out, permutation_in;
 logic valid_mess;
 logic [`PERMUTATION_WIDTH-1:0] output_reg;
-logic last_mess;
+logic last_mess, permutation_processing;
 
 PADDING_MODULE  #(
     .WRITE_DATA_WIDTH(DATA_INPUT_WIDTH),
     .READ_DATA_WIDTH(PERMUTATION_INPUT_WORD_WIDTH),
-    .DEPTH(`BUFFER_DEPTH)
+    .DEPTH(2*IN_OUT_RATIO)
 )  PADDING_PART (
     .CLK(CLK),
     .A_RST(A_RST),
@@ -34,7 +35,8 @@ PADDING_MODULE  #(
     .WRITE_VALID(DATA_IN_VALID),
     .READ_DATA(padding_out),
     .VALID_MESSAGE_FROM_PADDING(valid_mess),
-    .CTRL_LAST_MESSAGE_FROM_PADDING(last_mess)
+    .CTRL_LAST_MESSAGE_FROM_PADDING(last_mess),
+    .PERMUTATION_READY(permutation_processing)
 );
 
 PERMUTATION_MODULE #(
@@ -47,7 +49,8 @@ PERMUTATION_MODULE #(
     .OUT(output_reg),
     .VALID_MESSAGE_FROM_PADDING(valid_mess),
     .HASH_VALID(HASH_OUT_VALID),
-    .LAST_MESSAGE_FROM_PADDING(last_mess) 
+    .LAST_MESSAGE_FROM_PADDING(last_mess),
+    .PERMUTATION_PROCESSING(permutation_processing)
 ); 
 
 //genvar i;

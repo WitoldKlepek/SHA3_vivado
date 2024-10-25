@@ -23,37 +23,6 @@ logic [PTR_SIZE:0] wrPtr/*, wrPtrNext*/;
 logic [PTR_SIZE:0] rdPtr/*, rdPtrNext*/;
 logic [READ_DATA_WIDTH-1:0] rdData;
 
-
-//always_comb begin
-//    wrPtrNext = wrPtr;
-//    rdPtrNext = rdPtr;
-//    if(WRITE_EN) begin
-//        wrPtrNext = wrPtr + 1;
-//    end
-//    if (READ_EN) begin
-//        rdPtrNext = rdPtr + IN_OUT_RATIO;
-//    end
-//end
-
-//integer i;
-//always_ff @(posedge CLK, posedge A_RST) begin
-//    if(A_RST == 1'b1) begin
-//        wrPtr   <=  0;
-//        rdPtr   <=  0;
-//        for (i=0;i<DEPTH;i=i+1) begin
-//            mem[i]  <=  0;
-//        end
-//    end else 
-//        begin
-//            if(CE == 1'b1) begin
-//                wrPtr   <=  wrPtrNext;
-//                rdPtr   <=  rdPtrNext;
-//                //mem[wrPtr[PTR_SIZE-1:0]]    <=  WRITE_DATA;
-//            end
-//        end
-//    mem[wrPtr[PTR_SIZE-1:0]]    <=  WRITE_DATA;
-//end 
-
 integer i;
 always_ff @(posedge CLK, posedge A_RST) begin
     if(A_RST == 1'b1) begin
@@ -65,11 +34,34 @@ always_ff @(posedge CLK, posedge A_RST) begin
     end else 
         begin
         if(CE == 1'b1) begin
-            if(WRITE_EN) begin
-                wrPtr = wrPtr + 1;
-            end
+            if(WRITE_EN) begin          
+                //wrPtr = wrPtr + 1;
+                if(wrPtr[PTR_SIZE-1:0] + 1 == DEPTH) begin
+                    wrPtr[PTR_SIZE] = ~wrPtr[PTR_SIZE];
+                    wrPtr[PTR_SIZE-1:0] = 0;
+                end else
+                    wrPtr = wrPtr + 1;
+            end else begin
+                if(!(wrPtr[PTR_SIZE-1:0] == rdPtr[PTR_SIZE-1:0]))
+                    if(rdPtr[PTR_SIZE-1:0] + IN_OUT_RATIO >= DEPTH)
+                        wrPtr = rdPtr + IN_OUT_RATIO - DEPTH;
+                    else
+                        wrPtr = rdPtr + IN_OUT_RATIO;
+                else
+                    wrPtr = rdPtr;
+            end                      
+            //end else
+                //wrPtr = rdPtr;
             if (READ_EN) begin
-                rdPtr = rdPtr + IN_OUT_RATIO;
+                //rdPtr = rdPtr + IN_OUT_RATIO;
+                if(rdPtr[PTR_SIZE-1:0] + IN_OUT_RATIO >= DEPTH) begin
+                    rdPtr[PTR_SIZE] = ~rdPtr[PTR_SIZE];
+                    rdPtr[PTR_SIZE-1:0] = rdPtr[PTR_SIZE-1:0] + IN_OUT_RATIO - DEPTH;
+                end else
+                    //if(wrPtr[PTR_SIZE-1:0] < rdPtr[PTR_SIZE-1:0] + IN_OUT_RATIO)
+                        //rdPtr[PTR_SIZE-1:0] = wrPtr[PTR_SIZE-1:0];
+                    //else
+                    rdPtr = rdPtr + IN_OUT_RATIO;
             end
         end
     end
@@ -82,7 +74,6 @@ generate
     for (j=0; j<IN_OUT_RATIO;j=j+1) begin
         //assign rdData[(j+1)*WRITE_DATA_WIDTH-1:j*WRITE_DATA_WIDTH] = mem[rdPtr[PTR_SIZE-1:0]+j];
         assign rdData[(IN_OUT_RATIO-j)*WRITE_DATA_WIDTH-1:(IN_OUT_RATIO-j-1)*WRITE_DATA_WIDTH] = mem[rdPtr[PTR_SIZE-1:0]+j];
-
     end
 endgenerate
 

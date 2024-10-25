@@ -18,6 +18,8 @@ logic h_val;
 logic wait_f_new_mess;
 logic [4:0] twenty_four_counter;
 permutation_ctrl_states state;
+logic last_perm_for_mess;
+
 
 //ROUND_CONSTANT_COUNTER RND_CONST_CNT (
 //    .CLK(CLK),
@@ -33,6 +35,19 @@ ROUND_CONSTANT_COUNTER RND_CONST_CNT (
     .COUNTER(twenty_four_counter)
 );
 
+
+always@ (posedge CLK, posedge A_RST)
+begin
+    if(A_RST == 1'b1)
+        last_perm_for_mess  <=  1'b0;
+    else
+        if(CE == 1'b1)
+            if(LAST_MESSAGE_FROM_PADDING == 1'b1)
+                last_perm_for_mess  <=  1'b1;
+            else if(h_val == 1'b1)
+                last_perm_for_mess  <=  1'b0;
+            
+end
 //change name !!!!
 assign WAIT_FOR_NEW_MESSAGE = wait_f_new_mess & !VALID_NEW_MESSAGE_FROM_PADDING;
 
@@ -56,7 +71,7 @@ begin
 //                    end
                     COUNTING :
                         if(twenty_four_counter  == 23) begin
-                            if(LAST_MESSAGE_FROM_PADDING == 1'b1)
+                            if(last_perm_for_mess == 1'b1)
                                 state   <=  VALID;
                             else
                                 state   <=  WAIT_FOR_NEXT_MESS;                   

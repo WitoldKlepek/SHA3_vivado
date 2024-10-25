@@ -12,7 +12,8 @@ module PERMUTATION_MODULE #(
 	input logic CE,
 	input logic VALID_MESSAGE_FROM_PADDING,
 	input logic LAST_MESSAGE_FROM_PADDING,
-	output logic HASH_VALID
+	output logic HASH_VALID,
+	output logic PERMUTATION_PROCESSING
 	);
 
 	
@@ -21,6 +22,9 @@ logic [0:`STATE_SIZE-1] rnd_in, s_reg;
 logic [0:`Z_WIDTH-1] round_constant;
 logic wait_for_n_mess;
 //logic initial_state_bef_first_word;
+logic hash_valid_sig;
+
+assign PERMUTATION_PROCESSING = !wait_for_n_mess;
 
 RND RND1(
 	.IN(rnd_in),
@@ -29,7 +33,7 @@ RND RND1(
 );
 
 assign rnd_in = VALID_MESSAGE_FROM_PADDING ? {IN ^ s_reg[0:R_BLOCK_SIZE-1] ,s_reg[R_BLOCK_SIZE:`STATE_SIZE-1]} : s_reg;
-
+assign HASH_VALID = hash_valid_sig;
 //always@(posedge CLK, posedge A_RST)
 //begin
 //    if(A_RST == 1'b1) begin
@@ -51,7 +55,7 @@ PERMUTATION_CTRL_UNIT PERM_CTRL_CNT (
 	.VALID_NEW_MESSAGE_FROM_PADDING(VALID_MESSAGE_FROM_PADDING),
 	.WAIT_FOR_NEW_MESSAGE(wait_for_n_mess),
 	.LAST_MESSAGE_FROM_PADDING(LAST_MESSAGE_FROM_PADDING),
-	.HASH_VALID(HASH_VALID)
+	.HASH_VALID(hash_valid_sig)
 	);
 	
 	
@@ -61,8 +65,10 @@ begin
 		s_reg	<=	{`STATE_SIZE{1'b0}};
 	else
 		if(CE == 1'b1)
-		  if(wait_for_n_mess == 1'b0)
-			s_reg	<=	rnd_out;
+		  if(hash_valid_sig == 1'b1)
+		      s_reg	<=	{`STATE_SIZE{1'b0}};    
+		  else if(wait_for_n_mess == 1'b0)
+		      s_reg	<=	rnd_out;
 end
 
 //always@(posedge CLK, posedge A_RST)

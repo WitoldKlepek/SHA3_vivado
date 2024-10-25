@@ -16,7 +16,8 @@ module PADDING_MODULE #(
     input logic WRITE_VALID,
     output logic [READ_DATA_WIDTH-1:0] READ_DATA,
     output logic VALID_MESSAGE_FROM_PADDING,
-    output logic CTRL_LAST_MESSAGE_FROM_PADDING
+    output logic CTRL_LAST_MESSAGE_FROM_PADDING,
+    input logic PERMUTATION_READY
 );
 
 logic [READ_DATA_WIDTH-1:0] buffer_out_padder_in;
@@ -24,6 +25,10 @@ logic ctrl_read_en, ctrl_write_en;
 logic [PTR_SIZE-1:0] ctrl_padder_ptr;
 logic [READ_DATA_WIDTH-1:0] padder_out;
 logic ctrl_buf_empty, ctrl_buf_full;
+//logic buffer_rst;
+logic ctrl_last_mes_f_pad;
+//assign buffer_rst = A_RST ^ WRITE_VALID;
+
 
 BUFFER #(
     .WRITE_DATA_WIDTH(WRITE_DATA_WIDTH),
@@ -33,6 +38,7 @@ BUFFER #(
     .CLK(CLK),
     .CE(CE),
     .A_RST(A_RST),
+    //.A_RST(buffer_rst),
     .WRITE_DATA(WRITE_DATA),
     .WRITE_EN(ctrl_write_en),
     .READ_DATA(buffer_out_padder_in),
@@ -76,9 +82,11 @@ PADDING_CTRL_UNIT  #(
     .CTRL_BUF_READ_EN(ctrl_read_en),
     .CTRL_PAD_PTR(ctrl_padder_ptr),
     .BUF_EMPTY(ctrl_buf_empty),
-    .BUF_FULL(ctrl_buf_full)
+    .BUF_FULL(ctrl_buf_full),
+    .PERMUTATION_READY(PERMUTATION_READY),
+    .CTRL_LAST_MESSAGE_FROM_PADDING(ctrl_last_mes_f_pad)
 );
 
-assign CTRL_LAST_MESSAGE_FROM_PADDING = (ctrl_padder_ptr == 0) ? 1'b0 : 1'b1;
+assign CTRL_LAST_MESSAGE_FROM_PADDING = ctrl_last_mes_f_pad;
 
 endmodule

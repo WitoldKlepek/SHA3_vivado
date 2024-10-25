@@ -34,6 +34,8 @@ initial begin
     #50 ce      =  1'b1;
     #50 data_in_valid =1'b1;
     #500 data_in_valid =1'b0;
+    //#50 data_in_valid = 1'b1;
+    //#500 data_in_valid = 1'b0;
     #1000 $finish;
     
 end
@@ -45,6 +47,8 @@ initial begin
     //#10 data_in_seq    =  {4{8'hC5}};
     #500 data_in_seq   =   {4{8'hF0}};
     //#500 data_in_seq   =   {4{8'hF0}};
+    //#50 data_in_seq         = {32'h89ABCDEF} ;
+    //#500 data_in_seq        = {4{8'hF0}};
 end
 
 endmodule
