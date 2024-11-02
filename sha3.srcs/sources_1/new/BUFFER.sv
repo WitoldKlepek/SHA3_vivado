@@ -36,16 +36,17 @@ always_ff @(posedge CLK, posedge A_RST) begin
         if(CE == 1'b1) begin
             if(WRITE_EN) begin          
                 //wrPtr = wrPtr + 1;
-                if(wrPtr[PTR_SIZE-1:0] + 1 == DEPTH) begin
+                if(wrPtr[PTR_SIZE-1:0]  == DEPTH) begin
                     wrPtr[PTR_SIZE] = ~wrPtr[PTR_SIZE];
                     wrPtr[PTR_SIZE-1:0] = 0;
                 end else
                     wrPtr = wrPtr + 1;
             end else begin
-                if(!(wrPtr[PTR_SIZE-1:0] == rdPtr[PTR_SIZE-1:0]))
-                    if(rdPtr[PTR_SIZE-1:0] + IN_OUT_RATIO >= DEPTH)
+                if(!(wrPtr[PTR_SIZE-1:0] == rdPtr[PTR_SIZE-1:0]) )
+                    if(rdPtr[PTR_SIZE-1:0] + IN_OUT_RATIO >= DEPTH) begin
                         wrPtr = rdPtr + IN_OUT_RATIO - DEPTH;
-                    else
+                        wrPtr[PTR_SIZE] = ~wrPtr[PTR_SIZE];
+                    end else
                         wrPtr = rdPtr + IN_OUT_RATIO;
                 else
                     wrPtr = rdPtr;

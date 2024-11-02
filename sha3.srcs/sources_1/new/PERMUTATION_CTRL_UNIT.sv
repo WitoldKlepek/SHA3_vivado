@@ -85,7 +85,11 @@ begin
                             twenty_four_counter   <=  1;
                         end
                     VALID :
-                        state   <= WAIT_FOR_NEXT_MESS; 
+                        if(VALID_NEW_MESSAGE_FROM_PADDING == 1'b1) begin
+                            state   <=  COUNTING;
+                            twenty_four_counter   <=  0;
+                        end else
+                            state   <= WAIT_FOR_NEXT_MESS; 
                     default :
                         state   <=  INIT;
                 endcase

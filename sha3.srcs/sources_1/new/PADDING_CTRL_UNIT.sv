@@ -26,7 +26,8 @@ typedef enum {  INIT,
                 READ_NEXT, 
                 WAIT_FOR_PERM_FINISH_PROCESSING,
                 READ_NEXT_AFTER_WAIT,
-                WAIT_FOR_PERM_AND_COUNTING} padding_ctrl_states;
+                WAIT_FOR_PERM_AND_COUNTING,
+                READ_NEXT_AFTER_WAIT_AND_COUNTING} padding_ctrl_states;
 
 logic [BUF_CNT_SIZE-1:0] read_en_counter;
 //logic read_en_det;
@@ -74,7 +75,7 @@ begin
                 end
                 WAIT_FOR_PERM_AND_COUNTING : begin
                     if(PERMUTATION_READY == 1'b0)
-                        STATE           <=  READ_NEXT_AFTER_WAIT; 
+                        STATE           <=  READ_NEXT_AFTER_WAIT_AND_COUNTING; 
                     else if(DATA_IN_VALID == 1'b0)
                         STATE           <=  WAIT_FOR_PERM_FINISH_PROCESSING; //maybe to block? output notready                                                                         
                 end        
@@ -90,7 +91,13 @@ begin
                         STATE   <=  COUNTING;
                     else
                         STATE   <=  INIT;
-                end           
+                end
+                READ_NEXT_AFTER_WAIT_AND_COUNTING : begin
+                     if(DATA_IN_VALID == 1'b1)
+                        STATE   <=  COUNTING;
+                    else
+                        STATE   <=  INIT;
+                end      
                 default : 
                     STATE   <=  INIT;
             endcase
@@ -124,6 +131,11 @@ begin
                 if(DATA_IN_VALID)
                     CTRL_BUF_WRITE_EN   <=  1'b1;
                 else
+                    CTRL_BUF_WRITE_EN   <=  1'b0;
+            READ_NEXT_AFTER_WAIT_AND_COUNTING :
+                if(DATA_IN_VALID)
+                    CTRL_BUF_WRITE_EN   <=  1'b1;
+                else
                     CTRL_BUF_WRITE_EN   <=  1'b0;       
             default :
                 CTRL_BUF_WRITE_EN   <=  1'b0;
@@ -141,6 +153,8 @@ begin
             if(STATE == READ_NEXT)
                 CTRL_BUF_READ_EN    <=  1'b1;          
             else if(STATE == READ_NEXT_AFTER_WAIT)
+                CTRL_BUF_READ_EN    <=  1'b1;
+            else if(STATE == READ_NEXT_AFTER_WAIT_AND_COUNTING)
                 CTRL_BUF_READ_EN    <=  1'b1;
             else
                 CTRL_BUF_READ_EN    <=  1'b0;
@@ -198,9 +212,22 @@ begin
                     pad_ptr_counter     <= IN_OUT_RATIO - 1;
                 end
                 READ_NEXT_AFTER_WAIT : begin
-                    read_en_counter     <= read_en_counter + 1;
-                    if(DATA_IN_VALID == 1'b1) 
+                    /*if(DATA_IN_VALID == 1'b1) begin
+                        read_en_counter     <= read_en_counter + 1;
+                        if(DATA_IN_VALID == 1'b1) 
+                            pad_ptr_counter     <= pad_ptr_counter - 1;
+                        end*/
+                    read_en_counter     <= 0;
+                    pad_ptr_counter     <= IN_OUT_RATIO - 1;
+                end
+                READ_NEXT_AFTER_WAIT_AND_COUNTING : begin                   
+                    if(DATA_IN_VALID == 1'b1) begin
                         pad_ptr_counter     <= pad_ptr_counter - 1;
+                        read_en_counter     <= read_en_counter + 1;
+                    end else begin
+                        read_en_counter     <= 0;
+                        pad_ptr_counter     <= IN_OUT_RATIO - 1;
+                    end                    
                 end
                 default: begin
                     read_en_counter <= 0;
@@ -264,7 +291,10 @@ begin
         CTRL_LAST_MESSAGE_FROM_PADDING <= 1'b0;
     else
         if(CE == 1'b1) begin
-            if((STATE == WAIT_FOR_PERM_FINISH_PROCESSING || STATE == WAIT_FOR_PERM_AND_COUNTING) && PERMUTATION_READY == 1'b0)
+            if((STATE == WAIT_FOR_PERM_FINISH_PROCESSING 
+            || STATE == WAIT_FOR_PERM_AND_COUNTING
+            || (STATE == READ_NEXT && DATA_IN_VALID == 1'b0)
+            ) && PERMUTATION_READY == 1'b0)
                 CTRL_LAST_MESSAGE_FROM_PADDING  <=  1'b1;
             else
                 CTRL_LAST_MESSAGE_FROM_PADDING  <=  1'b0;

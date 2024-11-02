@@ -23,6 +23,7 @@ logic [0:`Z_WIDTH-1] round_constant;
 logic wait_for_n_mess;
 //logic initial_state_bef_first_word;
 logic hash_valid_sig;
+logic first_round;
 
 assign PERMUTATION_PROCESSING = !wait_for_n_mess;
 
@@ -32,8 +33,15 @@ RND RND1(
 	.RND_CONST(round_constant)
 );
 
-assign rnd_in = VALID_MESSAGE_FROM_PADDING ? {IN ^ s_reg[0:R_BLOCK_SIZE-1] ,s_reg[R_BLOCK_SIZE:`STATE_SIZE-1]} : s_reg;
+//assign rnd_in = VALID_MESSAGE_FROM_PADDING ? {IN ^ s_reg[0:R_BLOCK_SIZE-1] ,s_reg[R_BLOCK_SIZE:`STATE_SIZE-1]} : s_reg;
+assign rnd_in = VALID_MESSAGE_FROM_PADDING ?  {IN ^ s_reg[0:R_BLOCK_SIZE-1] ,s_reg[R_BLOCK_SIZE:`STATE_SIZE-1]} 
+                : (first_round ? {IN ,{(`STATE_SIZE-R_BLOCK_SIZE){1'b0}}} 
+                :s_reg);
+                 
+
 assign HASH_VALID = hash_valid_sig;
+
+
 //always@(posedge CLK, posedge A_RST)
 //begin
 //    if(A_RST == 1'b1) begin
@@ -71,6 +79,17 @@ begin
 		      s_reg	<=	rnd_out;
 end
 
+always@(posedge CLK, posedge A_RST)
+begin
+	if(A_RST == 1'b1)
+		first_round   <=  1'b1;
+	else
+		if(CE == 1'b1)
+		  if(hash_valid_sig == 1'b1)
+		      first_round <=  1'b1;
+		  else
+		      first_round <=  1'b0;
+end
 //always@(posedge CLK, posedge A_RST)
 //begin
 //	if(A_RST == 1'b1)
